@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kataloguie - Poster Design</title>
     <link rel="shortcut icon" href="./assets/icon-web.png" type="image/x-icon">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -125,7 +128,6 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        /* Animation for modal appearance */
         @keyframes modalFadeIn {
             from {
                 opacity: 0;
@@ -159,14 +161,28 @@
             opacity: 0;
             filter: blur(10px);
             transition: opacity 0.5s ease, filter 0.5s ease;
+            background-color: #f0f0f0;
+            background-image: linear-gradient(90deg, #f0f0f0 0%, #f8f8f8 50%, #f0f0f0 100%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
         }
 
         .lazyloaded {
             opacity: 1;
             filter: blur(0);
+            animation: none;
+            background: none;
         }
 
-        /* Custom scrollbar */
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -184,14 +200,27 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #ff7ba9;
         }
+
+        .loading-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background-color: #FF9FBD;
+            width: 0%;
+            z-index: 100;
+            transition: width 0.3s ease;
+        }
     </style>
 </head>
 
 <body>
+    <div class="loading-bar" id="loadingBar"></div>
+    
     <header class="bg-header shadow-sm py-4">
         <div class="container mx-auto px-4 flex flex-col items-center">
             <div class="mb-4">
-                <img src="./assets/logo-web.png" alt="Logo" class="h-12 md:h-16">
+                <img src="./assets/logo-web.png" alt="Logo" class="h-12 md:h-16" loading="eager">
             </div>
 
             <div class="hidden md:flex space-x-6">
@@ -219,132 +248,9 @@
     </header>
 
     <main class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-            <div class="card cursor-pointer" onclick="openModal('post1')">
-                <img src="./assets/post/post1.png" alt="Poster 1" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post2')">
-                <img src="./assets/post/post2.png" alt="Poster 2" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post3')">
-                <img src="./assets/post/post3.png" alt="Poster 3" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post4')">
-                <img src="./assets/post/post4.png" alt="Poster 4" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post5')">
-                <img src="./assets/post/post5.png" alt="Poster 5" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post6')">
-                <img src="./assets/post/post6.png" alt="Poster 6" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post7')">
-                <img src="./assets/post/post7.png" alt="Poster 7" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post8')">
-                <img src="./assets/post/post8.png" alt="Poster 8" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post9')">
-                <img src="./assets/post/post9.png" alt="Poster 9" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post10')">
-                <img src="./assets/post/post10.png" alt="Poster 10" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post11')">
-                <img src="./assets/post/post11.png" alt="Poster 11" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post12')">
-                <img src="./assets/post/post12.png" alt="Poster 12" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post13')">
-                <img src="./assets/post/post13.png" alt="Poster 13" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post14')">
-                <img src="./assets/post/post14.png" alt="Poster 14" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post15')">
-                <img src="./assets/post/post15.png" alt="Poster 15" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post16')">
-                <img src="./assets/post/post16.png" alt="Poster 16" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post17')">
-                <img src="./assets/post/post17.png" alt="Poster 17" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post18')">
-                <img src="./assets/post/post18.png" alt="Poster 18" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post19')">
-                <img src="./assets/post/post19.png" alt="Poster 19" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post20')">
-                <img src="./assets/post/post20.png" alt="Poster 20" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post21')">
-                <img src="./assets/post/post21.png" alt="Poster 21" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post22')">
-                <img src="./assets/post/post22.png" alt="Poster 22" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post23')">
-                <img src="./assets/post/post23.png" alt="Poster 23" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post24')">
-                <img src="./assets/post/post24.png" alt="Poster 24" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post25')">
-                <img src="./assets/post/post25.png" alt="Poster 25" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post26')">
-                <img src="./assets/post/post26.png" alt="Poster 26" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post27')">
-                <img src="./assets/post/post27.png" alt="Poster 27" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post28')">
-                <img src="./assets/post/post28.png" alt="Poster 28" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post29')">
-                <img src="./assets/post/post29.png" alt="Poster 29" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post30')">
-                <img src="./assets/post/post30.png" alt="Poster 30" class="lazyload card-image" loading="lazy">
-            </div>
-
-            <div class="card cursor-pointer" onclick="openModal('post31')">
-                <img src="./assets/post/post31.png" alt="Poster 31" class="lazyload card-image" loading="lazy">
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6" id="posterGrid">
+            <!-- Gambar akan dimuat secara dinamis dengan JavaScript -->
         </div>
-
     </main>
 
     <div class="md:hidden floating-nav">
@@ -374,7 +280,7 @@
     <div id="qrisModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
         <div class="bg-white rounded-2xl p-6 w-80 text-center">
             <h2 class="text-lg font-semibold mb-3">Scan QRIS Pembayaran</h2>
-            <img src="./assets/qrcode/qris.jpeg" alt="QRIS" class="mx-auto w-50 h-50 mb-4 rounded-xl">
+            <img src="./assets/qrcode/qris.jpeg" alt="QRIS" class="mx-auto w-50 h-50 mb-4 rounded-xl" loading="lazy">
             <button onclick="closeQRIS()" class="bg-primary hover:bg-secondary text-white py-1 px-4 rounded-lg">
                 Tutup QRIS
             </button>
@@ -389,6 +295,85 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async></script>
     <script>
+        const posterConfig = {
+            totalImages: 31,
+            batchSize: 5,
+            delayBetweenBatches: 100
+        };
+
+        function preloadCriticalImages() {
+            const criticalImages = [
+                './assets/logo-web.png',
+                './assets/qrcode/qris.jpeg'
+            ];
+            
+            criticalImages.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+        }
+
+        function createPosterElement(posterId) {
+            const card = document.createElement('div');
+            card.className = 'card cursor-pointer';
+            card.onclick = () => openModal(posterId);
+            
+            const img = document.createElement('img');
+            img.className = 'lazyload card-image';
+            img.alt = `Poster ${posterId.replace('post', '')}`;
+            img.setAttribute('data-src', `./assets/post/${posterId}.png`);
+            img.loading = 'lazy';
+            
+            card.appendChild(img);
+            return card;
+        }
+
+        function loadImagesInBatches() {
+            const posterGrid = document.getElementById('posterGrid');
+            const loadingBar = document.getElementById('loadingBar');
+            let loadedCount = 0;
+            
+            function loadBatch(startIndex) {
+                const endIndex = Math.min(startIndex + posterConfig.batchSize, posterConfig.totalImages);
+                
+                for (let i = startIndex; i < endIndex; i++) {
+                    const posterId = `post${i + 1}`;
+                    const posterElement = createPosterElement(posterId);
+                    posterGrid.appendChild(posterElement);
+                }
+                
+                loadedCount = endIndex;
+                const progress = (loadedCount / posterConfig.totalImages) * 100;
+                loadingBar.style.width = `${progress}%`;
+                
+                if (endIndex < posterConfig.totalImages) {
+                    setTimeout(() => loadBatch(endIndex), posterConfig.delayBetweenBatches);
+                } else {
+                    setTimeout(() => {
+                        loadingBar.style.opacity = '0';
+                        setTimeout(() => loadingBar.style.display = 'none', 500);
+                    }, 500);
+                }
+            }
+            
+            loadBatch(0);
+        }
+
+        function initLazyLoading() {
+            if ('loading' in HTMLImageElement.prototype) {
+                const images = document.querySelectorAll('img[loading="lazy"]');
+                images.forEach(img => {
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                    }
+                });
+            } else {
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+                document.body.appendChild(script);
+            }
+        }
+
         function openQRIS() {
             document.getElementById("qrisModal").classList.remove("hidden");
         }
@@ -402,12 +387,14 @@
             const modalImg = document.getElementById('modalImage');
             const captionText = document.getElementById('modalCaption');
 
-            modalImg.src = `./assets/post/${posterId}.png`;
-
-            const posterNumber = posterId.replace('post', '');
-
-            modal.classList.add('show');
-            modal.style.display = "flex";
+            const modalImageSrc = `./assets/post/${posterId}.png`;
+            const tempImg = new Image();
+            tempImg.onload = function() {
+                modalImg.src = modalImageSrc;
+                modal.classList.add('show');
+                modal.style.display = "flex";
+            };
+            tempImg.src = modalImageSrc;
         }
 
         function closeModal() {
@@ -429,6 +416,12 @@
             if (event.key === 'Escape') {
                 closeModal();
             }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            preloadCriticalImages();
+            loadImagesInBatches();
+            initLazyLoading();
         });
     </script>
 </body>
