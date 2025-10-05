@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kataloguie - Poster Design</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #FFD4E1;
+        }
+
+        .bg-header {
+            background-color: #FF9FBD;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            display: block;
+            max-width: 85%;
+            max-height: 85%;
+            margin-top: 2%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-content:hover {
+            transform: scale(1.01);
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #f1f1f1;
+            font-size: 40px;
+            cursor: pointer;
+            z-index: 60;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            color: #FF9FBD;
+        }
+
+        .bg-primary {
+            background-color: #FF9FBD;
+        }
+
+        .bg-secondary {
+            background-color: #FFD4E1;
+        }
+
+        .text-primary {
+            color: #FF9FBD;
+        }
+
+        .text-secondary {
+            color: #FFD4E1;
+        }
+
+        .border-primary {
+            border-color: #FF9FBD;
+        }
+
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        .floating-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 40;
+            background-color: rgba(255, 159, 189, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 10px 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animation for modal appearance */
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes modalZoomIn {
+            from {
+                transform: scale(0.8);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .modal.show {
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        .modal.show .modal-content {
+            animation: modalZoomIn 0.3s ease;
+        }
+
+        .lazyload {
+            opacity: 0;
+            filter: blur(10px);
+            transition: opacity 0.5s ease, filter 0.5s ease;
+        }
+
+        .lazyloaded {
+            opacity: 1;
+            filter: blur(0);
+        }
+
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #ffffff;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #FF9FBD;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff7ba9;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="bg-header shadow-sm py-4">
+        <div class="container mx-auto px-4 flex flex-col items-center">
+            <!-- Logo -->
+            <div class="mb-4">
+                <img src="./assets/logo-web.png" alt="Logo" class="h-12 md:h-16">
+            </div>
+
+            <div class="hidden md:flex space-x-6">
+                <a href="https://fastwork.id/user/atikaaaca/infographics-63224529" target="_blank" class="text-white hover:text-secondary transition-colors duration-300">
+                    <i class="fa-solid fa-bag-shopping text-3xl"></i>
+                </a>
+                <button onclick="openQRIS()" class="text-white hover:text-secondary transition-colors duration-300">
+                    <i class="fa-solid fa-wallet text-3xl"></i>
+                </button>
+                <a href="#" target="_blank" class="text-white hover:text-secondary transition-colors duration-300">
+                    <i class="fa-brands fa-instagram text-3xl"></i>
+                </a>
+                <a href="#" target="_blank" class="text-white hover:text-secondary transition-colors duration-300">
+                    <i class="fa-brands fa-tiktok text-3xl"></i>
+                </a>
+                <a href="#" target="_blank" class="text-white hover:text-secondary transition-colors duration-300">
+                    <i class="fa-brands fa-telegram text-3xl"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+            <div class="card cursor-pointer" onclick="openModal('post1')">
+                <img src="./assets/post/post1.png" alt="Poster 1" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post2')">
+                <img src="./assets/post/post2.png" alt="Poster 2" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post3')">
+                <img src="./assets/post/post3.png" alt="Poster 3" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post4')">
+                <img src="./assets/post/post4.png" alt="Poster 4" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post5')">
+                <img src="./assets/post/post5.png" alt="Poster 5" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post6')">
+                <img src="./assets/post/post6.png" alt="Poster 6" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post7')">
+                <img src="./assets/post/post7.png" alt="Poster 7" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post8')">
+                <img src="./assets/post/post8.png" alt="Poster 8" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post9')">
+                <img src="./assets/post/post9.png" alt="Poster 9" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post10')">
+                <img src="./assets/post/post10.png" alt="Poster 10" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post11')">
+                <img src="./assets/post/post11.png" alt="Poster 11" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post12')">
+                <img src="./assets/post/post12.png" alt="Poster 12" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post13')">
+                <img src="./assets/post/post13.png" alt="Poster 13" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post14')">
+                <img src="./assets/post/post14.png" alt="Poster 14" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post15')">
+                <img src="./assets/post/post15.png" alt="Poster 15" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post16')">
+                <img src="./assets/post/post16.png" alt="Poster 16" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post17')">
+                <img src="./assets/post/post17.png" alt="Poster 17" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post18')">
+                <img src="./assets/post/post18.png" alt="Poster 18" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post19')">
+                <img src="./assets/post/post19.png" alt="Poster 19" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post20')">
+                <img src="./assets/post/post20.png" alt="Poster 20" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post21')">
+                <img src="./assets/post/post21.png" alt="Poster 21" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post22')">
+                <img src="./assets/post/post22.png" alt="Poster 22" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post23')">
+                <img src="./assets/post/post23.png" alt="Poster 23" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post24')">
+                <img src="./assets/post/post24.png" alt="Poster 24" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post25')">
+                <img src="./assets/post/post25.png" alt="Poster 25" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post26')">
+                <img src="./assets/post/post26.png" alt="Poster 26" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post27')">
+                <img src="./assets/post/post27.png" alt="Poster 27" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post28')">
+                <img src="./assets/post/post28.png" alt="Poster 28" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post29')">
+                <img src="./assets/post/post29.png" alt="Poster 29" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post30')">
+                <img src="./assets/post/post30.png" alt="Poster 30" class="lazyload card-image" loading="lazy">
+            </div>
+
+            <div class="card cursor-pointer" onclick="openModal('post31')">
+                <img src="./assets/post/post31.png" alt="Poster 31" class="lazyload card-image" loading="lazy">
+            </div>
+        </div>
+
+    </main>
+
+    <div class="md:hidden floating-nav">
+        <div class="flex space-x-6">
+            <a href="https://fastwork.id/user/atikaaaca/infographics-63224529" target="_blank" class="text-white hover:text-gray-200 transition-colors duration-300">
+                <i class="fa-solid fa-bag-shopping text-3xl"></i>
+            </a>
+            <button onclick="openQRIS()" class="text-white hover:text-gray-200 transition-colors duration-300">
+                <i class="fa-solid fa-wallet text-3xl"></i>
+            </button>
+            <a href="#" target="_blank" class="text-white hover:text-gray-200 transition-colors duration-300">
+                <i class="fa-brands fa-instagram text-3xl"></i>
+            </a>
+            <a href="#" target="_blank" class="text-white hover:text-gray-200 transition-colors duration-300">
+                <i class="fa-brands fa-tiktok text-3xl"></i>
+            </a>
+            <a href="#" target="_blank" class="text-white hover:text-gray-200 transition-colors duration-300">
+                <i class="fa-brands fa-telegram text-3xl"></i>
+            </a>
+        </div>
+    </div>
+
+    <div id="qrisModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-6 w-80 text-center">
+            <h2 class="text-lg font-semibold mb-3">Scan QRIS Pembayaran</h2>
+            <img src="./assets/qrcode/qris.jpeg" alt="QRIS" class="mx-auto w-50 h-50 mb-4 rounded-xl">
+            <button onclick="closeQRIS()" class="bg-primary hover:bg-secondary text-white py-1 px-4 rounded-lg">
+                Tutup QRIS
+            </button>
+        </div>
+    </div>
+
+    <div id="posterModal" class="modal">
+        <span class="close flex justify-center item-center" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="modalCaption" class="text-white text-center mt-4 text-lg"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async></script>
+    <script>
+        function openQRIS() {
+            document.getElementById("qrisModal").classList.remove("hidden");
+        }
+
+        function closeQRIS() {
+            document.getElementById("qrisModal").classList.add("hidden");
+        }
+
+        function openModal(posterId) {
+            const modal = document.getElementById('posterModal');
+            const modalImg = document.getElementById('modalImage');
+            const captionText = document.getElementById('modalCaption');
+
+            modalImg.src = `./assets/post/${posterId}.png`;
+
+            const posterNumber = posterId.replace('post', '');
+
+            modal.classList.add('show');
+            modal.style.display = "flex";
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('posterModal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = "none";
+            }, 100);
+        }
+
+        window.onclick = function (event) {
+            const modal = document.getElementById('posterModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+
+</html>
