@@ -451,7 +451,7 @@
             const img = document.createElement('img');
             img.className = 'lazyload card-image';
             img.alt = `Poster Desain ${posterId.replace('post', '')}`;
-            img.setAttribute('data-src', `./assets/post/${posterId}.png`);
+            img.setAttribute('data-src', `./assets/post/${posterId}.svg`);
             img.loading = 'lazy';
 
             card.appendChild(img);
@@ -548,7 +548,7 @@
 
             currentModalIndex = parseInt(posterId.replace('post', '')) - 1;
 
-            const modalImageSrc = `./assets/post/${posterId}.png`;
+            const modalImageSrc = `./assets/post/${posterId}.svg`;
             const tempImg = new Image();
             tempImg.onload = function () {
                 modalImg.src = modalImageSrc;
